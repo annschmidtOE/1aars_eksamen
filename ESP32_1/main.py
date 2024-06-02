@@ -60,17 +60,17 @@ while True:
     if adc_value > 2600 and adc_value < 2800:
         print("knap 1 trykket")
         pb1 += 1
-        msg = f"7c {pb1}"
+        msg = f"7c 1"
         esp_now.send(peer, msg)
     elif adc_value > 1800 and adc_value < 2000:
         print("knap 2 trykket")
         pb2 += 1
-        msg = f"7c {pb2}"
+        msg = f"7c 2"
         esp_now.send(peer, msg)
     elif pb.value() == 1:
         print("knap 3 trykket")
         pb3 += 1
-        msg = f"7c {pb3}"
+        msg = f"7c 3"
         esp_now.send(peer, msg)
     sleep(3)
 
