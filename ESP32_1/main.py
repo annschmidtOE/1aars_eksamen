@@ -23,6 +23,14 @@ def set_color(r, g, b):
 def clear():
     set_color(0, 0, 0)
     
+def red():
+    set_color(255, 0, 0)
+    
+def yellow():
+    set_color(255, 255, 0)
+
+def green():
+    set_color(0, 255, 0)
 
 fonts = [glcdfont,tt14,tt24,tt32]
 
@@ -62,7 +70,7 @@ peer = b'\xB0\xA7\x32\xDD\x6F\x30'
 esp_now.add_peer(peer)
 
 
-adc_pin = ADC(Pin(26))
+adc_pin = ADC(Pin(33))
 adc_pin.atten(ADC.ATTN_11DB)
 
 pb1 = 0
@@ -88,7 +96,7 @@ while True:
         print("knap 2 trykket")
         pb2 += 1
         esp_now.send(peer, "2")
-    elif pb.value() == 1:
+    elif pb.value() == 0:
         print("knap 3 trykket")
         pb3 += 1
         esp_now.send(peer, "3")
