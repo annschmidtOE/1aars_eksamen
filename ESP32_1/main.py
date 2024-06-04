@@ -73,7 +73,7 @@ pb = Pin(21, Pin.IN)
 while True:
     for i in range(n):
         if i < 12:
-            np[i] = (0, 255, 0)  # Green
+            np[i] = (0, 255, 0)  
         elif i > 11 and i < 24:
             np[i] = (255,0,0)
         elif i > 23:
