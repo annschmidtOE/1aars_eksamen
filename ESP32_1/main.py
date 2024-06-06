@@ -88,6 +88,7 @@ while True:
             np[i] = (255, 255, 0)
     np.write()
     adc_value = adc_pin.read()
+    print(adc_value)
     if adc_value > 2600 and adc_value < 2800:
         print("knap 1 trykket")
         pb1 += 1
