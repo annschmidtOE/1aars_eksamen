@@ -1,5 +1,8 @@
 from datetime import datetime
 import sqlite3
+import paho.mqtt.subscribe as subscribe
+
+print("Subscribe MQTT script running!")
 
 def create_table():
     try:
@@ -41,8 +44,27 @@ def insert_data(count):
 
 create_table()
 
-count = 0
+def get_data(client, userdata, message):
+    print("Received message:")
+    print(f"Topic: {message.topic}")
+    print(f"Payload: {message.payload}")
 
-for i in range(10): 
-    count += 1
-    insert_data(count)
+    try:
+        data = message.payload.decode('utf-8')
+        print(f"Decoded Data: {data}")
+
+        # Split the data string and get the last element
+        elements = data.split()
+        last_element = elements[-1]
+
+        # Convert last element to integer and insert into the database
+        count = int(last_element)
+        insert_data(count)
+
+    except UnicodeDecodeError as e:
+        print(f"Failed to decode message payload: {e}")
+    except ValueError as e:
+        print(f"Failed to convert last element to integer: {e}")
+
+# Subscribe to the topic "7c" and call get_data for each received message
+subscribe.callback(get_data, "7c", hostname="74.235.100.12", userdata={"message_count": 0})

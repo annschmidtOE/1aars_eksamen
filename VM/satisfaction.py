@@ -1,18 +1,17 @@
 from datetime import datetime
 import sqlite3
+import paho.mqtt.subscribe as subscribe
+
+print("Subscribe MQTT script running!")
 
 def create_table():
     try:
-        conn = sqlite3.connect("aktionshus.db")
-        cur = conn.cursor()
-        
-        cur.execute("DROP TABLE IF EXISTS satisfaction")
-        
         query = """CREATE TABLE IF NOT EXISTS satisfaction(
                     id INTEGER PRIMARY KEY AUTOINCREMENT, 
                     satisfaction INTEGER NOT NULL, 
                     date TEXT NOT NULL)"""
-        
+        conn = sqlite3.connect("aktionshus.db")
+        cur = conn.cursor()
         cur.execute(query)
         conn.commit()
         print("Table created successfully or already exists.")
@@ -29,7 +28,7 @@ def insert_data(satisfaction):
         current_datetime = datetime.now()
         formatted_datetime = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
         data = (satisfaction, formatted_datetime)
-
+        
         query = """INSERT INTO satisfaction(satisfaction, date) VALUES (?, ?)"""
         conn = sqlite3.connect("aktionshus.db")
         cur = conn.cursor()
@@ -46,14 +45,27 @@ def insert_data(satisfaction):
 
 create_table()
 
-while True:
+def get_data(client, userdata, message):
+    print("Received message:")
+    print(f"Topic: {message.topic}")
+    print(f"Payload: {message.payload}")
+
     try:
-        satisfaction = int(input("Enter 3 for perfect, 2 for fine, and 1 for horrible (or any other number to quit): "))
-        if satisfaction in [1, 2, 3]:
-            print(f"Inserting data: satisfaction={satisfaction}")
-            insert_data(satisfaction)
-        else:
-            print("Exiting...")
-            break
-    except ValueError:
-        print("Invalid input. Please enter a number.")
+        data = message.payload.decode('utf-8')
+        print(f"Decoded Data: {data}")
+
+        # Split the data string and get the second element
+        elements = data.split()
+        second_element = elements[1].strip("'")  # Remove single quote character
+
+        # Convert second element to integer and insert into the database
+        satisfaction = int(second_element)
+        insert_data(satisfaction)
+
+    except UnicodeDecodeError as e:
+        print(f"Failed to decode message payload: {e}")
+    except ValueError as e:
+        print(f"Failed to convert second element to integer: {e}")
+
+# Subscribe to the topic "7c" and call get_data for each received message
+subscribe.callback(get_data, "7c", hostname="74.235.100.12", userdata={"message_count": 0})
