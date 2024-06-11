@@ -53,11 +53,9 @@ def get_data(client, userdata, message):
         data = message.payload.decode('utf-8')
         print(f"Decoded Data: {data}")
 
-        # Split the data string and get the last element
         elements = data.split()
         last_element = elements[-1]
 
-        # Convert last element to integer and insert into the database
         count = int(last_element)
         insert_data(count)
 
@@ -66,5 +64,4 @@ def get_data(client, userdata, message):
     except ValueError as e:
         print(f"Failed to convert last element to integer: {e}")
 
-# Subscribe to the topic "7c" and call get_data for each received message
 subscribe.callback(get_data, "7c", hostname="74.235.100.12", userdata={"message_count": 0})

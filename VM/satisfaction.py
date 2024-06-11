@@ -54,11 +54,9 @@ def get_data(client, userdata, message):
         data = message.payload.decode('utf-8')
         print(f"Decoded Data: {data}")
 
-        # Split the data string and get the second element
         elements = data.split()
-        second_element = elements[1].strip("'")  # Remove single quote character
+        second_element = elements[1].strip("'") 
 
-        # Convert second element to integer and insert into the database
         satisfaction = int(second_element)
         insert_data(satisfaction)
 
@@ -67,5 +65,4 @@ def get_data(client, userdata, message):
     except ValueError as e:
         print(f"Failed to convert second element to integer: {e}")
 
-# Subscribe to the topic "7c" and call get_data for each received message
 subscribe.callback(get_data, "7c", hostname="74.235.100.12", userdata={"message_count": 0})
