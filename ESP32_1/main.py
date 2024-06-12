@@ -22,15 +22,6 @@ def set_color(r, g, b):
 
 def clear():
     set_color(0, 0, 0)
-    
-def red():
-    set_color(255, 0, 0)
-    
-def yellow():
-    set_color(255, 255, 0)
-
-def green():
-    set_color(0, 255, 0)
 
 fonts = [glcdfont,tt14,tt24,tt32]
 
