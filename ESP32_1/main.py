@@ -20,9 +20,6 @@ def set_color(r, g, b):
         np[i] = (r, g, b)
     np.write()
 
-def clear():
-    set_color(0, 0, 0)
-
 fonts = [glcdfont,tt14,tt24,tt32]
 
 text = 'Tryk på knap efter tilfredshed.'
