@@ -1,11 +1,69 @@
-{% extends 'base.html' %}
-{% block title %}Kundetælling{% endblock %}
-{% block content %}
-<meta http-equiv="refresh" content="5">
-<h1>Customer Count</h1>
-{% if data %}
-    <img class="img-fluid float-left" src='data:image/png;base64,{{ data1 }}'/>
-{% else %}
-    <p>No data available.</p>
-{% endif %}
-{% endblock %}
+<!DOCTYPE HTML>
+
+
+<html>
+	<head>
+		
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-panels.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel-noscript.css" />
+			<link rel="stylesheet" href="css/style.css" />
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+	</head>
+	<body>
+
+	
+		<div id="header">
+			<div class="container">
+					
+					<div id="logo">
+						<h1><a href="#">Auktionshuset.com</a></h1>
+						
+					</div>
+				
+				
+					<nav id="nav">
+						<ul>
+							<li><a href="index.html">Start</a></li>
+							<li class="active"><a href="antalkunder.html">Antal kunder&nbsp;</a></li>
+							<li><a href="kundetilfredshed.html">Kundetilfredshed&nbsp;</a></li>
+						</ul>
+					</nav>
+			</div>
+		</div>
+		<div id="main">
+			<div class="container">
+				<div class="row">
+						<div id="sidebar" class="3u">
+							<section>	
+							</section>
+						</div>
+						<div id="content" class="6u skel-cell-important">
+							<section>
+								<header>
+									<h2>Antal kunder</h2>
+									<span class="byline">Uge x</span>
+								</header>
+								<p><a href="#" class="image full"><img class="img-fluid float-left" src='data:image/png;base64,{{ data1 }}'/></a></p>	
+							</section>
+						</div>	
+						</div>
+				</div>
+			</div>
+		</div>
+		<div id="footer">
+			<div class="container">			
+</html>
+
+
+
