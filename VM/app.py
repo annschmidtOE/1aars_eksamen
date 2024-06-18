@@ -91,7 +91,6 @@ def satisfaction_count():
     image_data = get_data_satisfaction()
     return render_template("satisfaction.html", data=image_data)
 
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG)
-    app.run(debug=True, host="0.0.0.0")
+
+app.run(debug=True, host="0.0.0.0")
 
